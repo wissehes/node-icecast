@@ -1,0 +1,11 @@
+{
+    "name": "node-icecast",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "TheChicken14",
+    "license": "MIT",
+    "dependencies": {
+        "music-metadata": "^7.0.0",
+        "nodeshout": "^0.1.3"
+    }
+}
