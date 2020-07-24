@@ -25,6 +25,11 @@ shout.setAudioInfo('channels', '2');
 shout.open();
 
 const playSong = async(song) => {
+    //Start playing
+    const fileStream = new FileReadStream(song, 65536)
+    const shoutStream = fileStream.pipe(new ShoutStream(shout));
+    console.log(`Now playing: ${songMetadata}`)
+
     // Get metadata of file
     const songMetadata = await getMetadata(song)
 
@@ -32,11 +37,6 @@ const playSong = async(song) => {
     const iceMeta = nodeshout.createMetadata();
     iceMeta.add('song', songMetadata);
     shout.setMetadata(iceMeta);
-
-    //Start playing
-    const fileStream = new FileReadStream(song, 65536)
-    const shoutStream = fileStream.pipe(new ShoutStream(shout));
-    console.log(`Now playing: ${songMetadata}`)
 
     shoutStream.on('finish', function() {
         songs.shift()
